@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>calibWorldToHmd</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+    <Import Project="..\..\..\addons\ofxOpenVR\ofxOpenVR.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+    <Import Project="..\..\..\addons\ofxOpenVR\ofxOpenVR.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+    <Import Project="..\..\..\addons\ofxOpenVR\ofxOpenVR.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+    <Import Project="..\..\..\addons\ofxOpenVR\ofxOpenVR.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm\detail;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx;..\..\..\addons\ofxOpenVR\libs\glm\glm\simd;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm\detail;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx;..\..\..\addons\ofxOpenVR\libs\glm\glm\simd;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm\detail;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx;..\..\..\addons\ofxOpenVR\libs\glm\glm\simd;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm;..\..\..\addons\ofxOpenVR\libs\glm\glm\detail;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc;..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx;..\..\..\addons\ofxOpenVR\libs\glm\glm\simd;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenVR\src\CGLRenderModel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\glm.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUI2DGraph.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUI2DPad.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIBiLabelSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUICanvas.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIDragableLabelButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIDropDownList.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIEventArgs.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIFPS.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIFPSSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImage.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImageButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImageSampler.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImageSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUILabel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUILabelButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUILabelToggle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIMinimalSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIMovingGraph.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageToggle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUINumberDialer.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIRadio.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIRangeSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIRectangle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIRotarySlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIScrollableCanvas.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUISlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUISortableList.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUISpacer.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUISpectrum.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUISuperCanvas.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUITabBar.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUITextArea.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUITextInput.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIToggle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIToggleMatrix.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIValuePlotter.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIWaveform.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIWidget.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\CalibPoints.h" />
+    <ClInclude Include="src\StaticCGSceneAttr.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\src\CGLRenderModel.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\src\ofxOpenVR.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\common.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_common.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_exponential.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_geometric.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_integer.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_matrix.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_packing.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_trigonometric.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\func_vector_relational.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\precision.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\setup.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_float.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_gentype.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_half.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_int.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat2x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat2x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat2x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat3x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat3x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat3x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat4x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat4x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_mat4x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_vec.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_vec1.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_vec2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_vec3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\type_vec4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_features.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_fixes.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_noise.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_swizzle.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_swizzle_func.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\detail\_vectorize.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\exponential.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\ext.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\fwd.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\geometric.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\glm.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\bitfield.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\color_space.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\constants.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\epsilon.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\functions.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\integer.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\matrix_access.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\matrix_integer.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\matrix_inverse.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\noise.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\packing.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\quaternion.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\random.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\reciprocal.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\round.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\type_aligned.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\type_precision.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\type_ptr.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\ulp.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtc\vec1.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\associated_min_max.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\bit.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\closest_point.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\color_encoding.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\color_space.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\color_space_YCoCg.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\common.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\compatibility.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\component_wise.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\dual_quaternion.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\euler_angles.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\extend.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\extended_min_max.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\exterior_product.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\fast_exponential.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\fast_square_root.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\fast_trigonometry.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\gradient_paint.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\handed_coordinate_space.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\hash.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\integer.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\intersect.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\io.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\log_base.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_cross_product.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_decompose.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_interpolation.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_major_storage.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_operation.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_query.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\matrix_transform_2d.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\mixed_product.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\norm.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\normal.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\normalize_dot.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\number_precision.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\optimum_pow.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\orthonormalize.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\perpendicular.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\polar_coordinates.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\projection.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\quaternion.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\range.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\raw_data.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\rotate_normalized_axis.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\rotate_vector.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\scalar_multiplication.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\scalar_relational.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\spline.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\std_based_type.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\string_cast.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\transform.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\transform2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\type_aligned.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\type_trait.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\vector_angle.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\vector_query.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\vec_swizzle.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\gtx\wrap.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\integer.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat2x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat2x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat2x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat3x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat3x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat3x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat4x2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat4x3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\mat4x4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\matrix.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\packing.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\common.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\exponential.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\geometric.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\integer.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\matrix.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\packing.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\platform.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\trigonometric.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\simd\vector_relational.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\trigonometric.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\vec2.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\vec3.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\vec4.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\OpenVR\headers\openvr.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\OpenVR\headers\openvr_capi.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenVR\libs\OpenVR\headers\openvr_driver.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DGraph.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICanvas.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDefines.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDragableLabelButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDropDownList.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIEventArgs.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPS.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPSSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSampler.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMinimalSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMovingGraph.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUINumberDialer.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIOFWrapper.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRadio.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRangeSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRectangle.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRotarySlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISortableList.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpacer.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpectrum.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISuperCanvas.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITabBar.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextArea.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextInput.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggleMatrix.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIValuePlotter.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWaveform.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidget.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgets.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWrapper.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="icon.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

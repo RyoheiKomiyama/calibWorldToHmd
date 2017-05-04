@@ -217,10 +217,18 @@ namespace scgsa {
     public:
         
         struct pointset{
-            pointset(ofVec3f v): world_point(v){}
-            ofVec3f world_point;
-            ofVec3f vive_point;
-            bool isFinished = false;
+            pointset(ofVec3f v): world_point(v),
+				world_ori_y(ofVec3f(0, 0, 1)),
+				world_ori_z(ofVec3f(0, -1, 0)) {}
+			ofVec3f world_point;
+			ofVec3f world_ori_y;
+			ofVec3f world_ori_z;
+			ofVec3f vive_point;
+			ofVec3f vive_ori_y;
+			ofVec3f vive_ori_z;
+			ofVec3f rotvec;
+			float angle;
+			bool isFinished = false;
         };
         
         vector<pointset> pointsets;
@@ -278,8 +286,27 @@ namespace scgsa {
                     ofDrawSphere(pointsets[i].world_point, 5/SCALE);
                     ofPopStyle();
                 }
+				if (pointsets[target].isFinished == true) {
+					ofPushMatrix();
+					ofScale(-1, 1, -1);
+					ofTranslate(pointsets[i].vive_point);
+					ofRotate(pointsets[i].angle, pointsets[i].rotvec.x, 
+						pointsets[i].rotvec.y, pointsets[i].rotvec.z);
+					ofDrawAxis(10/SCALE);
+					ofPopMatrix();					
+				}
             }
         }
+
+		void setValue(ofVec3f pos, ofVec3f rotvec, float angle, ofVec3f ori_y, ofVec3f ori_z) {
+			pointsets[target].vive_point = pos;
+			pointsets[target].vive_ori_y = ori_y;
+			pointsets[target].vive_ori_z = ori_z;
+			pointsets[target].rotvec = rotvec;
+			pointsets[target].angle = angle;
+			pointsets[target].isFinished = true;
+			nextTarget();
+		}
         
         void nextTarget(){
             target++;

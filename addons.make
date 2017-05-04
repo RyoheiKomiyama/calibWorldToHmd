@@ -1,2 +1,3 @@
+ofxOpenVR
 ofxUI
 ofxXmlSettings

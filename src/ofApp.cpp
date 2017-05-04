@@ -2,6 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetVerticalSync(false);
+	ofSetFrameRate(90);
+	ofSetLogLevel(OF_LOG_VERBOSE);
+	ofLogVerbose("HELLLOOOO");
+
+	// We need to pass the method we want ofxOpenVR to call when rending the scene
+	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
+
     cam.setDistance(4);
     cam.setNearClip(0.01);
     cam.setFarClip(1000);
@@ -10,7 +18,7 @@ void ofApp::setup(){
     ui = new ofxUISuperCanvas("MENU");
     ui->setWidgetFontSize(ofxUIWidgetFontType::OFX_UI_FONT_MEDIUM);
     ui->addSpacer();
-    ui->addButton("Capture Tracking Value", false);
+    ui->addButton("Set Value", false);
     ui->addButton("Next Target", false);
     ui->setColorBack(ofxUIColor(100, 100, 100, 128));
     ui->autoSizeToFitWidgets();
@@ -18,8 +26,22 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
+void ofApp::exit() {
+	openVR.exit();
+}
+
+//--------------------------------------------------------------
 void ofApp::update(){
+	openVR.update();
     calibpoints.update();
+
+	trackerPose = openVR.getLastGenericTrackerPose();
+	ofVec3f rotvec;
+	float angle;
+	trackerPose.getRotate().getRotate(angle, rotvec.x, rotvec.y, rotvec.z);
+	pos = trackerPose.getTranslation();
+	ori_y = ofVec3f(0, 1, 0).getRotated(angle, rotvec);
+	ori_z = ofVec3f(0, 0, 1).getRotated(angle, rotvec);
 }
 
 //--------------------------------------------------------------
@@ -28,15 +50,39 @@ void ofApp::draw(){
     ofEnableAlphaBlending();
     ofEnableDepthTest();
     cam.begin();
-    
-    staticCgSceneAttr.draw();
-    staticCgSceneAttr.drawBlackWireFrame();
-    
-    calibpoints.draw();
-
-    cam.end();
+	{
+		// scene
+		ofPushMatrix();
+		ofScale(-1, 1, -1);
+		staticCgSceneAttr.draw();
+		staticCgSceneAttr.drawBlackWireFrame();
+		// points
+		calibpoints.draw();
+		ofPopMatrix();
+		// tracker
+		ofPushMatrix();
+		ofTranslate(trackerPose.getTranslation());
+		float x, y, z, angle;
+		trackerPose.getRotate().getRotate(angle, x, y, z);
+		ofRotate(angle, x, y, z);
+		ofDrawAxis(0.3);
+		ofPopMatrix();
+	}
+	cam.end();
     ofDisableDepthTest();
     ofDisableAlphaBlending();
+
+	stringstream ss;
+	ss << "pos:   " << pos << endl;
+	ss << "ori_y: " << ori_y << endl;
+	ss << "ori_z: " << ori_z << endl;
+	ofDrawBitmapStringHighlight(ss.str(), 20, 140);
+
+	openVR.drawDebugInfo(10.0f, 500.0f);
+}
+
+//--------------------------------------------------------------
+void  ofApp::render(vr::Hmd_Eye nEye) {
 }
 
 //--------------------------------------------------------------
@@ -47,8 +93,11 @@ void ofApp::guiEvent(ofxUIEventArgs &e) {
     if (kind == OFX_UI_WIDGET_BUTTON)
     {
         ofxUIButton *button = (ofxUIButton *)e.widget;
-        if (name == "Capture Tracking Value" && button->getValue() == 0) { // button released
-            calibpoints.pointsets[calibpoints.target].isFinished = true;
+        if (name == "Set Value" && button->getValue() == 0) { // button released
+			ofVec3f rotvec;
+			float angle;
+			trackerPose.getRotate().getRotate(angle, rotvec.x, rotvec.y, rotvec.z);
+			calibpoints.setValue(pos, rotvec, angle, ori_y, ori_z);
         }
         if (name == "Next Target" && button->getValue() == 0) { // button released
             calibpoints.nextTarget();
