@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxUI.h"
 #include "StaticCGSceneAttr.h"
 
 class ofApp : public ofBaseApp{
@@ -26,5 +27,8 @@ class ofApp : public ofBaseApp{
     scgsa::CalibPoints calibpoints;
     ofEasyCam cam;
     
+    // UI
+    ofxUISuperCanvas *ui;
+    void guiEvent(ofxUIEventArgs &e);
     
 };

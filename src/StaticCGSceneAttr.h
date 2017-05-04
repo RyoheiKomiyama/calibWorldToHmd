@@ -146,15 +146,15 @@ namespace scgsa {
 
 	public:
 		StaticCGSceneAttr() {
-			ColorBox box_r(ofFloatColor(200 / COLORSCALE, 100 / COLORSCALE, 100 / COLORSCALE), ofVec3f(0, 0, -160 / SCALE));
-			ColorBox box_y(ofFloatColor(210 / COLORSCALE, 210 / COLORSCALE, 100 / COLORSCALE), ofVec3f(-200 / SCALE, 0, -60 / SCALE));
-			ColorBox box_b(ofFloatColor(70 / COLORSCALE, 100 / COLORSCALE, 130 / COLORSCALE), ofVec3f(140 / SCALE, 0, 40 / SCALE));
+			ColorBox box_r(ofFloatColor(200 / COLORSCALE, 100 / COLORSCALE, 100 / COLORSCALE), ofVec3f(0, 1/SCALE, -160 / SCALE));
+			ColorBox box_y(ofFloatColor(210 / COLORSCALE, 210 / COLORSCALE, 100 / COLORSCALE), ofVec3f(-200 / SCALE, 1/SCALE, -60 / SCALE));
+			ColorBox box_b(ofFloatColor(70 / COLORSCALE, 100 / COLORSCALE, 130 / COLORSCALE), ofVec3f(140 / SCALE, 1/SCALE, 40 / SCALE));
 			boxes.push_back(box_r);
 			boxes.push_back(box_y);
 			boxes.push_back(box_b);
-			ColorBox box_r_black(ofFloatColor(0, 0, 0), ofVec3f(0, 0, -160 / SCALE));
-			ColorBox box_y_black(ofFloatColor(0, 0, 0), ofVec3f(-200 / SCALE, 0, -60 / SCALE));
-			ColorBox box_b_black(ofFloatColor(0, 0, 0), ofVec3f(140 / SCALE, 0, 40 / SCALE));
+			ColorBox box_r_black(ofFloatColor(0, 0, 0), ofVec3f(0, 1/SCALE, -160 / SCALE));
+			ColorBox box_y_black(ofFloatColor(0, 0, 0), ofVec3f(-200 / SCALE, 1/SCALE, -60 / SCALE));
+			ColorBox box_b_black(ofFloatColor(0, 0, 0), ofVec3f(140 / SCALE, 1/SCALE, 40 / SCALE));
 			boxes.push_back(box_r_black);
 			boxes.push_back(box_y_black);
 			boxes.push_back(box_b_black);
@@ -214,6 +214,7 @@ namespace scgsa {
     
     
     class CalibPoints{
+    public:
         
         struct pointset{
             pointset(ofVec3f v): world_point(v){}
@@ -225,6 +226,7 @@ namespace scgsa {
         vector<pointset> pointsets;
         int target = 0;
         ofColor color = ofColor(127, 127, 127, 127);
+        ofColor finished_color = ofColor(0, 255, 0, 127);
         ofColor target_color = ofColor(255, 0, 0, 127);
         
     public:
@@ -247,9 +249,14 @@ namespace scgsa {
         }
         
         void update(){
-            uint64_t t = (ofGetElapsedTimeMillis()/500)%2;
+            uint64_t t = (ofGetElapsedTimeMillis()/300)%2;
             if(t==0){
-                target_color = ofColor(255, 0, 0, 127);
+                if(pointsets[target].isFinished==true){
+                    target_color = finished_color;
+                }
+                else{
+                    target_color = ofColor(255, 0, 0, 127);
+                }
             }
             else if(t==1){
                 target_color = color;
@@ -260,7 +267,8 @@ namespace scgsa {
             for(int i=0; i<pointsets.size(); i++){
                 if(i!=target){
                     ofPushStyle();
-                    ofSetColor(color);
+                    if(pointsets[i].isFinished==true) ofSetColor(finished_color);
+                    else ofSetColor(color);
                     ofDrawSphere(pointsets[i].world_point, 5/SCALE);
                     ofPopStyle();
                 }
@@ -271,6 +279,11 @@ namespace scgsa {
                     ofPopStyle();
                 }
             }
+        }
+        
+        void nextTarget(){
+            target++;
+            if(target==pointsets.size()) target=0;
         }
     };
 
