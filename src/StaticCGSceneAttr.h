@@ -9,6 +9,8 @@
 #ifndef StaticCGSceneAttr_h
 #define StaticCGSceneAttr_h
 
+#include "ofxCv.h"
+
 // meter or centimeter
 #define METERSCALE
 #ifdef METERSCALE
@@ -233,6 +235,8 @@ namespace scgsa {
         
         vector<pointset> pointsets;
         int target = 0;
+		ofMatrix4x4 calibmat;
+		bool isCalibrated = false;
         ofColor color = ofColor(127, 127, 127, 127);
         ofColor finished_color = ofColor(0, 255, 0, 127);
         ofColor target_color = ofColor(255, 0, 0, 127);
@@ -254,7 +258,13 @@ namespace scgsa {
             pointsets.push_back(pointset(ofVec3f(200, 60, 100)/SCALE));
             pointsets.push_back(pointset(ofVec3f(200, 60, 40)/SCALE));
             pointsets.push_back(pointset(ofVec3f(140, 60, 40)/SCALE));
-        }
+			//ground
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 5; j++) {
+					pointsets.push_back(pointset(ofVec3f(-200 * (1 - i), 0, -100 * (2 - j))/SCALE));
+				}
+			}
+		}
         
         void update(){
             uint64_t t = (ofGetElapsedTimeMillis()/300)%2;
@@ -286,10 +296,11 @@ namespace scgsa {
                     ofDrawSphere(pointsets[i].world_point, 5/SCALE);
                     ofPopStyle();
                 }
-				if (pointsets[target].isFinished == true) {
+				if (pointsets[i].isFinished == true) {
 					ofPushMatrix();
-					ofScale(-1, 1, -1);
-					ofTranslate(pointsets[i].vive_point);
+					// usual
+					if(!isCalibrated) ofScale(-1, 1, -1);
+					ofTranslate(calibmat*pointsets[i].vive_point);
 					ofRotate(pointsets[i].angle, pointsets[i].rotvec.x, 
 						pointsets[i].rotvec.y, pointsets[i].rotvec.z);
 					ofDrawAxis(10/SCALE);
@@ -305,6 +316,7 @@ namespace scgsa {
 			pointsets[target].rotvec = rotvec;
 			pointsets[target].angle = angle;
 			pointsets[target].isFinished = true;
+			calibrate();
 			nextTarget();
 		}
         
@@ -312,6 +324,45 @@ namespace scgsa {
             target++;
             if(target==pointsets.size()) target=0;
         }
+
+		void calibrate() {
+			vector<ofVec3f> ofWps; // world points
+			vector<ofVec3f> ofVps; // vive points
+			for (int i = 0; i < pointsets.size(); i++) {
+				if (pointsets[i].isFinished) {
+					ofWps.push_back(pointsets[i].world_point);
+					ofVps.push_back(pointsets[i].vive_point);
+				}
+			}
+			if (ofWps.size() < 6) return;
+			isCalibrated = true;
+			
+			vector<cv::Point3f> cvWps = ofxCv::toCv(ofWps);
+			vector<cv::Point3f> cvVps = ofxCv::toCv(ofVps);
+			cv::Mat cvWpsMat(4, cvWps.size(), CV_32F);
+			cv::Mat cvVpsMat(4, cvVps.size(), CV_32F);
+			for (int i = 0; i < cvWps.size(); i++) {
+				cvWpsMat.at<float>(0, i) = cvWps[i].x;
+				cvWpsMat.at<float>(1, i) = cvWps[i].y;
+				cvWpsMat.at<float>(2, i) = cvWps[i].z;
+				cvWpsMat.at<float>(3, i) = 1;
+				cvVpsMat.at<float>(0, i) = cvVps[i].x;
+				cvVpsMat.at<float>(1, i) = cvVps[i].y;
+				cvVpsMat.at<float>(2, i) = cvVps[i].z;
+				cvVpsMat.at<float>(3, i) = 1;
+			}
+			cv::Mat cvVpsMat_t = cvVpsMat.t();
+			cv::Mat VVt = cvVpsMat*cvVpsMat_t;
+			cv::Mat VVtInv = VVt.inv();
+			cv::Mat M = cv::Mat(4, 4, CV_32F);
+			M = cvWpsMat*cvVpsMat_t*VVtInv;
+			ofMatrix4x4 m((float*)M.data);
+			calibmat = m;
+			// save calibration matrix
+			cv::FileStorage fs(ofToDataPath("")+"calibmat.yml", cv::FileStorage::WRITE);
+			fs << "calibmat" << M;
+			fs.release();
+		}
     };
 
     

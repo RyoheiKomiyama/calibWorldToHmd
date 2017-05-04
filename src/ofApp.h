@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenVR.h"
+#include "ofxCv.h"
 #include "ofxUI.h"
 #include "StaticCGSceneAttr.h"
 

@@ -53,15 +53,17 @@ void ofApp::draw(){
 	{
 		// scene
 		ofPushMatrix();
-		ofScale(-1, 1, -1);
+		if(!calibpoints.isCalibrated) ofScale(-1, 1, -1);
 		staticCgSceneAttr.draw();
 		staticCgSceneAttr.drawBlackWireFrame();
 		// points
 		calibpoints.draw();
 		ofPopMatrix();
+
 		// tracker
 		ofPushMatrix();
-		ofTranslate(trackerPose.getTranslation());
+		// usual
+		ofTranslate(calibpoints.calibmat*trackerPose.getTranslation());
 		float x, y, z, angle;
 		trackerPose.getRotate().getRotate(angle, x, y, z);
 		ofRotate(angle, x, y, z);
@@ -75,8 +77,9 @@ void ofApp::draw(){
 	stringstream ss;
 	ss << "pos:   " << pos << endl;
 	ss << "ori_y: " << ori_y << endl;
-	ss << "ori_z: " << ori_z << endl;
-	ofDrawBitmapStringHighlight(ss.str(), 20, 140);
+	ss << "ori_z: " << ori_z << endl << endl;
+	ss << "calibmat: " << endl << calibpoints.calibmat << endl;
+	ofDrawBitmapString(ss.str(), 20, 120);
 
 	openVR.drawDebugInfo(10.0f, 500.0f);
 }

@@ -13,3 +13,6 @@ Project.xcconfig
 config.make
 openFrameworks-Info.plist
 *.xcodeproj/
+
+*.yaml
+*.yml
